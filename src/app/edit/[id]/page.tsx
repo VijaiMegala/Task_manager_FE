@@ -20,7 +20,6 @@ const Edit = () => {
                 }
             });
             setTask(response.data);
-            console.log(response.data);
         }
         fetchTask();
     }, []);
@@ -37,7 +36,9 @@ const Edit = () => {
           }
       });
       toast.success("Task updated successfully");
-      router.push("/");
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
   }
   return (
     <>

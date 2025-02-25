@@ -29,12 +29,6 @@ export default function Home() {
     }
 
     useEffect(() => {
-        if (!isAuthenticated) {
-            router.push('/login');
-        }
-    }, []);
-
-    useEffect(() => {
         if (!token) {
             router.push('/login');
         }
@@ -64,7 +58,9 @@ export default function Home() {
             }
         });
         toast.success("Task deleted successfully");
-        setTasks(tasks.filter((task: any) => task._id !== id));
+        setTimeout(() => {
+            setTasks(tasks.filter((task: any) => task._id !== id));
+        }, 1000);
     }
 
   return (

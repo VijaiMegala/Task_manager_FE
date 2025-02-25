@@ -20,9 +20,10 @@ const Add = () => {
                  Authorization: `Bearer ${token}`
              }
          });
-         console.log(response);
          toast.success("Task added successfully");
-         router.push("/");
+         setTimeout(() => {
+            router.push("/");
+         }, 1000);
      }
     const task = {
         id: "",
