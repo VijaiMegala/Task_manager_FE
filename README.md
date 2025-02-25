@@ -1,9 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Manager Application
 
-## Getting Started
+A full-stack task management application built with Next.js, featuring user authentication and CRUD operations for tasks.
 
-First, run the development server:
+## Features
 
+- User Authentication (Login/Signup)
+- Task Management:
+  - Create new tasks
+  - View task details
+  - Edit existing tasks
+  - Delete tasks
+  - Search tasks
+  - Sort tasks by title, description, or status
+- Responsive Design
+- Form Validation
+- Toast Notifications
+- Protected Routes
+
+## Tech Stack
+
+### Frontend
+- Next.js 15.1.7
+- React 19.0.0
+- TypeScript
+- Tailwind CSS
+- React Icons
+- React Toastify
+- Axios
+
+### Development Tools
+- ESLint
+- PostCSS
+- TypeScript
+
+## Prerequisites
+
+- Node.js (v18 or higher)
+- npm/yarn/pnpm/bun
+
+## Environment Variables
+
+Create a `.env.local` file in the root directory with:
+
+env
+NEXT_PUBLIC_BASE_URL= get from developer
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd task_manager
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
 # or
@@ -14,23 +76,47 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Application Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/src/app` - Main application pages
+- `/src/components` - Reusable React components
+- `/src/context` - React context for state management
+- `/src/styles` - Global styles and Tailwind configuration
 
-## Learn More
+## Key Features Explained
 
-To learn more about Next.js, take a look at the following resources:
+### Authentication
+- Secure login and signup functionality
+- JWT token-based authentication
+- Protected routes using AuthGuard
+- Persistent authentication state
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Task Management
+- Create tasks with title, description, status, and due date
+- View detailed task information
+- Edit existing tasks
+- Delete tasks with confirmation
+- Search functionality across all task fields
+- Sort tasks by different attributes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### User Interface
+- Responsive design for mobile and desktop
+- Clean and intuitive interface
+- Form validation with error messages
+- Toast notifications for user feedback
+- Loading states and error handling
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
