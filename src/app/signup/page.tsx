@@ -34,7 +34,7 @@ const Signup = () => {
             }
         } catch (error: unknown) {
             if (error instanceof Error) {
-                toast.error(error.message);
+                toast.error("User already exists");
             } else {
                 toast.error('An unexpected error occurred');
             }

@@ -46,7 +46,7 @@ export default function Home() {
             setTasks(response.data);
         }
         fetchTasks();
-    }, [router, token]);
+    }, []);
 
     const handleView = (id: string) => {
         router.push(`/view/${id}`);

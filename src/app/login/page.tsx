@@ -32,7 +32,7 @@ const Login = () => {
             }
         } catch (error: unknown) {
             if (error instanceof Error) {
-                toast.error(error.message);
+                toast.error('Invalid credentials');
             } else {
                 toast.error('An unexpected error occurred');
             }
