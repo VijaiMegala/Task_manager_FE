@@ -7,33 +7,38 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "react-toastify";
+
+// First, let's define a Task interface at the top of the file
+interface Task {
+    _id: string;
+    title: string;
+    description: string;
+    status: string;
+}
+
 export default function Home() {
     const router = useRouter();
-    const { isAuthenticated, token } = useAuth();
-    const [tasks, setTasks] = useState([]);
+    const { token } = useAuth();
+    const [tasks, setTasks] = useState<Task[]>([]);
     const [search, setSearch] = useState("");
-    const [sortBy, setSortBy] = useState("title");
+    const [sortBy, setSortBy] = useState<keyof Task>("title");
 
-    const filteredTasks = tasks.filter((task: any) => 
+    const filteredTasks = tasks.filter((task: Task) => 
         task.title.toLowerCase().includes(search.toLowerCase()) ||
         task.description.toLowerCase().includes(search.toLowerCase()) ||
         task.status.toLowerCase().includes(search.toLowerCase())
     );
 
-    const sortedAndFilteredTasks = filteredTasks.sort((a: any, b: any) => {
+    const sortedAndFilteredTasks = filteredTasks.sort((a: Task, b: Task) => {
         return a[sortBy].toLowerCase().localeCompare(b[sortBy].toLowerCase());
     });
-
-    const handleSearch = (search: string) => {
-        setSearch(search);
-    }
 
     useEffect(() => {
         if (!token) {
             router.push('/login');
         }
         const fetchTasks = async () => {
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks`, {
+            const response = await axios.get<Task[]>(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -41,7 +46,7 @@ export default function Home() {
             setTasks(response.data);
         }
         fetchTasks();
-    }, []);
+    }, [router, token]);
 
     const handleView = (id: string) => {
         router.push(`/view/${id}`);
@@ -59,7 +64,7 @@ export default function Home() {
         });
         toast.success("Task deleted successfully");
         setTimeout(() => {
-            setTasks(tasks.filter((task: any) => task._id !== id));
+            setTasks(tasks.filter((task: Task) => task._id !== id));
         }, 1000);
     }
 
@@ -76,7 +81,7 @@ export default function Home() {
                 <select 
                     className="px-4 py-2 text-black bg-white rounded-lg border border-gray-300 focus:outline-none focus:border-black"
                     value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
+                    onChange={(e) => setSortBy(e.target.value as keyof Task)}
                 >
                     <option value="title">Title</option>
                     <option value="description">Description</option>
@@ -84,7 +89,7 @@ export default function Home() {
                 </select>
             </div>
             <div className="w-full h-[85%] overflow-y-auto flex flex-col items-center gap-5">
-                {sortedAndFilteredTasks.map((task: any) => (
+                {sortedAndFilteredTasks.map((task: Task) => (
                     <ListItem key={task._id} title={task.title} status={task.status} onView={() => handleView(task._id)} onEdit={() => handleEdit(task._id)} onDelete={() => handleDelete(task._id)}/>
                 ))}
             </div>

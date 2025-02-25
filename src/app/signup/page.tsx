@@ -32,8 +32,12 @@ const Signup = () => {
                     router.push('/');
                 }, 1000);
             }
-        } catch (error: any) {
-            toast.error(error.response?.data?.message || 'Signup failed, please try again');
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                toast.error(error.message);
+            } else {
+                toast.error('An unexpected error occurred');
+            }
         }
     }
     return (

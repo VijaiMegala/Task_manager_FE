@@ -17,7 +17,7 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
         } else if (token && isPublicPath) {
             router.push('/');
         }
-    }, [pathname]);
+    }, [pathname, router]);
 
     return <>{children}</>;
 };

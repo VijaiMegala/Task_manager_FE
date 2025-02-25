@@ -30,9 +30,12 @@ const Login = () => {
                     router.push('/');
                 }, 1000);
             }
-        } catch (error: any) {
-            toast.error(error.response?.data?.message || 'Login failed, please check your credentials');
-            console.error('Login failed:', error);
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                toast.error(error.message);
+            } else {
+                toast.error('An unexpected error occurred');
+            }
         }
     }
 

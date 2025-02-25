@@ -1,6 +1,5 @@
 "use client";
 import TaskDetails from "@/components/TaskDetails";
-import { useParams } from "next/navigation";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
@@ -20,10 +19,12 @@ const Add = () => {
                  Authorization: `Bearer ${token}`
              }
          });
-         toast.success("Task added successfully");
-         setTimeout(() => {
-            router.push("/");
-         }, 1000);
+         if (response.status === 201) {
+            toast.success("Task added successfully");
+            setTimeout(() => {
+                router.push("/");
+            }, 1000);
+         }
      }
     const task = {
         id: "",

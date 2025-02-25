@@ -63,7 +63,7 @@ const TaskDetails = ({task, isDisabled, isAdd, onSubmit}: {task: Task | null, is
     };
 
     const handleSubmit = () => {
-        if (!isDisabled && validateForm()) {
+        if (validateForm()) {
             onSubmit(title, description, status, dueDate);
         }
     };

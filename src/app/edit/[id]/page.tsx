@@ -22,7 +22,7 @@ const Edit = () => {
             setTask(response.data);
         }
         fetchTask();
-    }, []);
+    }, [params.id, token]);
 
     const handleSave = async (title: string, description: string, status: string, dueDate: string) => {
       const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks/${params.id}`, {
@@ -35,10 +35,12 @@ const Edit = () => {
               Authorization: `Bearer ${token}`
           }
       });
-      toast.success("Task updated successfully");
-      setTimeout(() => {
-        router.push("/");
-      }, 1000);
+      if (response.status === 200) {
+        toast.success("Task updated successfully");
+        setTimeout(() => {
+            router.push("/");
+        }, 1000);
+      }
   }
   return (
     <>

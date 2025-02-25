@@ -3,7 +3,6 @@ import TaskDetails, { Task } from "@/components/TaskDetails";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
-import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -22,10 +21,11 @@ const View = () => {
             setTask(response.data);
         }
         fetchTask();
-    }, []);
+    }, [params.id, token]);
 
     const handleBack = () => {
       router.back();
+
   }
 
   return (
